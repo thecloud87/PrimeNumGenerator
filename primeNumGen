@@ -1,0 +1,32 @@
+#simple solution
+
+def primeGen(x):
+    myList = []
+    for p in range(2, (x)+1):
+         for i in range(2,p):
+             if p%i == 0:
+                 break
+         else:
+             myList.append(p)
+    print myList
+
+primeGen(100)
+
+#using yield (better performance)
+
+import math
+
+def primegen(n):
+    yield 2
+
+    primes = []
+    primeCandidate = 3
+    while primeCandidate < n:
+        plist = [primeCandidate % p for p in primes]
+        if all(plist):
+            primes.append(primeCandidate)
+            yield primeCandidate
+        primeCandidate += 2
+
+primelist = primegen(100)
+print list(primelist)
